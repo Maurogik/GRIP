@@ -1,6 +1,7 @@
 -- main loop of the programm
 
 require "terminal"
+require "functions"
 
 version =" 1.0"
 
@@ -10,6 +11,8 @@ By Gwenn Aubert and Bastien Maureille -- 2013
 type help for details
 ]])
 
+predicates = {}
+
 while true do
    cmd = prompt()
    if (cmd == "exit") then
@@ -18,7 +21,18 @@ while true do
    if (cmd == "help") then
       help()
    end
-   pred, def = split(cmd)
-   print(pred)
-   print(def)
+   if (string.find(cmd, "=") ~= nil) then
+      pred, def = split(cmd)
+      print(pred)
+      print(def)
+   else 
+      space = string.find(cmd, " ")
+      if (space ~= nil) then
+	 error(cmd, space,"syntax error: character ' ' unexpected")
+      else 
+	 if (predicates[cmd] == nil) then
+	    error(cmd, 0, "syntax error: '"..cmd.."' is not a predicate")
+	 end
+      end
+   end
 end

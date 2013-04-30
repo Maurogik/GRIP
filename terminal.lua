@@ -9,6 +9,16 @@ function prompt()
 end
 
 
+function error(cmd, i, msg)
+   print("syntax error !")
+   print(cmd)
+   for x = 0, i-2 do 
+      printf(" ")
+   end
+   printf("^\n%s\n", msg)
+end
+
+
 function help()
    print([[ 
 How to use GRIP :
@@ -22,6 +32,7 @@ s                : successor operator
 >                : change arity on the left
 o                : composition operator
 r                : recursion operator
+(pred)           : previsouly defined predicate
 pred=[predicate] : define "pred" as a new predicate thanks to
 	          the previous operators
 pred(args)       : call the predicate "pred" with the arguments "args"

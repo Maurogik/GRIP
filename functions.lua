@@ -1,1 +1,1 @@
--- functions used to make primitiv recursiv functions
+-- functions to build primitiv recursiv functions
