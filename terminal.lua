@@ -43,7 +43,7 @@ function split(cmd)
    preds = {}
    defs = {}
    i = 1
-   for pred, def in string.gmatch(cmd, "(%w+)=(%w+)") do
+   for pred, def in string.gmatch(cmd, "(%w+)=([%a><]+)") do
       preds[i] = pred
       defs[i] = def
       i = i+1
