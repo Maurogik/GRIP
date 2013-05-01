@@ -20,23 +20,19 @@ while true do
    end
    if (cmd == "help") then
       help()
-   end
-   if (string.find(cmd, "=") ~= nil) then
+   else
       space = string.find(cmd, " ")
       if (space ~= nil) then
 	 error(cmd, space,"syntax error: character ' ' unexpected")
       else
-	 pred, def = split(cmd)
-	 print(pred)
-	 print(def)
-      end
-   else 
-      space = string.find(cmd, " ")
-      if (space ~= nil) then
-	 error(cmd, space,"syntax error: character ' ' unexpected")
-      else 
-	 if (predicates[cmd] == nil) then
-	    error(cmd, 0, "syntax error: '"..cmd.."' is not a predicate")
+	 if (string.find(cmd, "=") ~= nil) then
+	    pred, def = split(cmd)
+	    print(pred)
+	    print(def)
+	 else 
+	    if (predicates[cmd] == nil) then
+	       error(cmd, 0, "syntax error: '"..cmd.."' is not a predicate")
+	    end
 	 end
       end
    end
