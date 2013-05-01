@@ -29,6 +29,10 @@ while true do
 	    pred, def = split(cmd)
 	    print(pred)
 	    print(def)
+	    uec = string.find(def,"[^zisor<>]")
+	    if (uec ~= nil) then
+	       error(cmd, uec+string.len(pred)+1, "syntax error: " .. def:match("[^zisor<>]") .. " unexpected")
+	    end
 	 else 
 	    if (predicates[cmd] == nil) then
 	       error(cmd, 0, "syntax error: '"..cmd.."' is not a predicate")

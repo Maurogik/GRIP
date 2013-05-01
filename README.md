@@ -1,4 +1,4 @@
 GRIP
 ====
 
-Gnu Recursive Interpretation Processor
+GNU Recursive Interpretation Processor
