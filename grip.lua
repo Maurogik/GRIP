@@ -22,9 +22,14 @@ while true do
       help()
    end
    if (string.find(cmd, "=") ~= nil) then
-      pred, def = split(cmd)
-      print(pred)
-      print(def)
+      space = string.find(cmd, " ")
+      if (space ~= nil) then
+	 error(cmd, space,"syntax error: character ' ' unexpected")
+      else
+	 pred, def = split(cmd)
+	 print(pred)
+	 print(def)
+      end
    else 
       space = string.find(cmd, " ")
       if (space ~= nil) then
