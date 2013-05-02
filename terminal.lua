@@ -50,3 +50,18 @@ function split(cmd)
    end
    return preds[1], defs[1]
 end
+
+function call(cmd)
+   predicate = {}
+   arguments = {}
+   i = 1
+   for pred, args in string.gmatch(cmd, "(%w+)%((.*)%)") do
+      predicate[i] = pred
+      arguments[i] = args
+      i = i+1
+   end
+   print(predicate[1])
+   print(arguments[1])
+   return predicate[1], arguments[1]
+end
+   
