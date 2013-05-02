@@ -33,14 +33,22 @@ while true do
 	    if (uec ~= nil) then
 	       error(cmd, uec+string.len(pred)+1, "syntax error: character '" .. def:match("[^zisor<>]") .. "' unexpected")
 	    end
+	    -- TODO : else pred definition
 	 else 
 	    pred, args = call(cmd)
-	    if (pred == nil or call == nil) then
+	    if (pred == nil) then
 	       par_index = string.find(cmd, "%(") or string.find(cmd, "%)") or 0
 	       error(cmd, par_index, "syntax error: missing parenthesis")
 	    else
-	       if (predicates[pred] == nil) then
-		  error(cmd, 0, "syntax error: '"..pred.."' is not a predicate")
+	       if (args == nil) then
+		  error(cmd, string.len(pred)+1, "syntax error: '"..pred.."' : bad arguments")		  
+	       else
+		  if (predicates[pred] == nil) then
+		    error(cmd, 0, "syntax error: '"..pred.."' is not a predicate")
+		  else
+		     arguments = split_args(args)
+		     -- TODO pred call
+		  end
 	       end
 	    end
 	 end

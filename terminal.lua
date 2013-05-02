@@ -55,6 +55,7 @@ function call(cmd)
    predicate = {}
    arguments = {}
    i = 1
+   args_format = "[%d?(%d+(,%d)*)]"
    for pred, args in string.gmatch(cmd, "(%w+)%((.*)%)") do
       predicate[i] = pred
       arguments[i] = args
@@ -65,3 +66,15 @@ function call(cmd)
    return predicate[1], arguments[1]
 end
    
+
+
+function split_args(args)
+   arguments = {}
+   i = 0
+   for arg in string.gmatch(args, "(%d+)") do
+      print(arg)
+      arguments[i] = arg
+      i = i+1
+   end
+   return arguments
+end
