@@ -49,14 +49,18 @@ while true do
                 else
                         -- TODO : else pred definition
                         betterDef = preProcessDef(def)
+                        sucess, resEval = pcall(gripEval,betterDef)
+                        if sucess then
+                            if #resEval > 1 then
+                                    print("warning : eval result should only return 1 function")
+                            end
 
-                        resEval = gripEval(betterDef)
-
-                        if #resEval > 1 then
-                                print("warning : eval result should only return 1 function")
+                            predicates[pred] = resEval[1]
+                        else
+                            print("ERROR : ")
+                            print(resEval)
                         end
 
-                        predicates[pred] = resEval[1]
                         
                 end
                 
