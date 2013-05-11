@@ -39,11 +39,11 @@ pred(args)       : call the predicate "pred" with the arguments "args"
 ]])
 end
 
-function split(cmd)
+function splitPredFromDef(cmd)
    preds = {}
    defs = {}
    i = 1
-   for pred, def in string.gmatch(cmd, "(%w+)=([%a><]+)") do
+   for pred, def in string.gmatch(cmd, "(%w+)=(.+)") do
       preds[i] = pred
       defs[i] = def
       i = i+1
@@ -51,7 +51,7 @@ function split(cmd)
    return preds[1], defs[1]
 end
 
-function call(cmd)
+function splitPredicateCall(cmd)
    predicate = {}
    arguments = {}
    i = 1
@@ -70,11 +70,59 @@ end
 
 function split_args(args)
    arguments = {}
-   i = 0
+   --add the index of the first argument of interest
+   arguments[1] = 2
+   i = 2
    for arg in string.gmatch(args, "(%d+)") do
       print(arg)
       arguments[i] = arg
       i = i+1
    end
    return arguments
+end
+
+
+function preProcessDef(def)
+
+   resDef = {}
+   i = 1
+   print("preProcessDef")
+   --////////////////////////////////TO CHANGE///////////////////////////////
+   --[[for temp in string.gmatch(def, "([zisor><(%(%w+%)])") do
+   --for temp in string.gmatch(def, "([zisor<>])") do
+      resDef[i] = temp
+      print(temp)
+      i = i+1
+   end--]]
+
+   local strTemp = def
+   while strTemp do
+
+      indPredStart, indPredEnd = string.find(strTemp, "(%(%w+%))")  
+      indSymbStart, indSymbEnd = string.find(strTemp, "([zisor><])")
+
+      if indSymbStart == nil and indPredStart == nil then
+         strTemp = nil
+      elseif indSymbStart == nil then
+         resDef[i] = string.sub(strTemp, indPredStart + 1, indPredEnd - 1)
+         strTemp = string.sub(strTemp, indPredEnd + 1)
+      elseif indPredStart == nil then
+         resDef[i] = string.sub(strTemp, indSymbStart, indSymbEnd)
+         strTemp = string.sub(strTemp, indSymbEnd + 1)
+      else
+         if indSymbStart < indPredStart then
+            resDef[i] = string.sub(strTemp, indSymbStart, indSymbEnd)
+            strTemp = string.sub(strTemp, indSymbEnd + 1)
+         else
+            resDef[i] = string.sub(strTemp, indPredStart + 1, indPredEnd - 1)
+            strTemp = string.sub(strTemp, indPredEnd + 1)
+         end
+      end
+
+
+      print(resDef[i])
+      i = i + 1
+   end
+
+   return resDef
 end
