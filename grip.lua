@@ -34,9 +34,13 @@ while true do
      if (cmd == "help") then
             help()
      else
-            space = string.find(cmd, " ")
-            if (space ~= nil) then
-         error(cmd, space,"syntax error: character ' ' unexpected")
+            --space = string.find(cmd, " ")
+            sep = string.find(cmd, "%p+") --or string.find(cmd, "%s+") 
+            print ("sep ")
+            print(sep)
+            --if (space ~= nil) then
+            if (sep ~= nil and cmd:sub(sep,sep) ~= ',' and cmd:sub(sep,sep) ~= '=' and cmd:sub(sep,sep) ~= '(' and cmd:sub(sep,sep) ~= ')') then
+         error(cmd, sep,"syntax error: character '".. string.sub(cmd,sep,sep) .."' unexpected")
             else
          if (string.find(cmd, "=") ~= nil) then
                 pred, def = splitPredFromDef(cmd)
