@@ -1,46 +1,17 @@
--- main loop of the programm
-
+require "eval"
 require "terminal"
 require "functions"
-require "eval"
 
-version =" 1.0"
-
-print("GNU RIP " .. version .. [[ 
-Welcome to GNU RIP, the GNU Recursive Interpretation Processor
-By Gwenn Aubert and Bastien Maureille -- 2013
-type help for details
-
-     °,
-      `'
-        \ ___
-         /   7
-        (_/_/\
-         \    \
-          \    \
-          _\    \__
-         (   \     )
-          \___\___/ 
-
-]])
-
-
-
-while true do
-     cmd = prompt()
+function main_loop(cmd)
      if (cmd == "exit") then
             os.exit()
      end
      if (cmd == "help") then
             help()
      else
-            --space = string.find(cmd, " ")
-            sep = string.find(cmd, "%p+") --or string.find(cmd, "%s+") 
-            print ("sep ")
-            print(sep)
-            --if (space ~= nil) then
-            if (sep ~= nil and cmd:sub(sep,sep) ~= ',' and cmd:sub(sep,sep) ~= '=' and cmd:sub(sep,sep) ~= '(' and cmd:sub(sep,sep) ~= ')') then
-         error(cmd, sep,"syntax error: character '".. string.sub(cmd,sep,sep) .."' unexpected")
+            space = string.find(cmd, " ")
+            if (space ~= nil) then
+         error(cmd, space,"syntax error: character ' ' unexpected")
             else
          if (string.find(cmd, "=") ~= nil) then
                 pred, def = splitPredFromDef(cmd)
@@ -110,4 +81,4 @@ while true do
          end
             end
      end
-end
+ end

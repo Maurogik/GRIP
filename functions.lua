@@ -233,5 +233,5 @@ for i=1,#symbols do
     predicates[symbols[i]] = basics[symbols[i]]
 end
 
-print(basics["r"][1])
-print(basics["r"][2])
+--print(basics["r"][1])
+--print(basics["r"][2])
