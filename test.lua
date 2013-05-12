@@ -18,10 +18,14 @@ function test()
     c1()
     print(i)  --> 2
 
-    table = {'a','b','c','d'}
-    tab2 = {'f'}..table
-    for i=1,#tab2 do
-      print(tab2[i])
+
+    print("argstest")
+    args = {1,2,3,4}
+    args2=args
+    table.remove(args2,2)
+
+    for i=1,#args do
+      print(args[i])
     end
 
 end

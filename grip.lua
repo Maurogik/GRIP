@@ -78,8 +78,9 @@ while true do
                     else
                          arguments = split_args(args)
 
-                         if #arguments - 1 < predicates[pred][2] then
-                            print("ERROR : not enough arguments")
+                         if #arguments - 1 ~= predicates[pred][2] then
+                            print("ERROR : wrong number of arguments")
+                            printf("%d expected\n", predicates[pred][2])
                         else
                              -- TODO pred call
                              print("arg : ")
@@ -93,7 +94,7 @@ while true do
                                  print(resEval)
 
                             else
-                                print("ERROR : unable to compute : bad arguments")
+                                print("ERROR : unable to compute : bad arguments or bad call")
                                 print(resEval)
                             end
 

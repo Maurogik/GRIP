@@ -1,13 +1,13 @@
 
 --TODO, if not needed clean up the redundant cases in the switch below : NEEDED
 --TODO, add arity integreation : as a second value in each function table entry : DONE
---TODO, check the arity functions, I'm not sure about how they should behave
+--TODO, check the arity functions, I'm not sure about how they should behave : DONE
 
 require "functions"
 
 --The recursive evaluation function, return a table of the evaluated functions and their arity
 --After recursing back to the top, the size of the table should always be 1 (if not, ERROR)
---The formula paramenter is expected to be a table containing 
+--The formula parameter is expected to be a table containing 
 -- each of the symbols or predicates saved as strings (one symbol/predicate per entry)
 function gripEval(formula)
 
