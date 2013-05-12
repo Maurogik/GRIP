@@ -22,6 +22,7 @@ type help for details
 ]])
 
 if (arg[1] ~= nil) then
+    print("loading from file ...")
     file = io.open(arg[1])
     reading = true
     count = 1
@@ -35,10 +36,10 @@ if (arg[1] ~= nil) then
             reading = false
         end
     end
-else
-    while true do
-        cmd = prompt()
-        print (cmd)
-        main_loop(cmd)
-    end
+end
+
+while true do
+    cmd = prompt()
+    print (cmd)
+    main_loop(cmd)
 end

@@ -4,7 +4,8 @@ require "functions"
 
 function main_loop(cmd)
      if (cmd == "exit") then
-            os.exit()
+        print("See you soon !")
+        os.exit()
      end
      if (cmd == "help") then
             help()
