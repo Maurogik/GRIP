@@ -12,14 +12,16 @@
 predicates = {}
 
 function zero(args)
+    print("in zero")
      return 0
 end
 
 
 function identity(args)
+    print("in identity")
     local index = args[1]
     if index > #args then
-        print("Error during evaluation, wrong number of argument")
+        print("Error during identity, wrong number of argument")
         return nil
     end
     return args[index]
@@ -27,9 +29,10 @@ end
 
 
 function successor(args)
+    print("in successor")
     local index = args[1]
     if index > #args then
-        print("Error during evaluation, wrong number of argument")
+        print("Error during successor, wrong number of argument")
         return nil
     end
     return args[index] + 1
@@ -65,6 +68,7 @@ function generateComposition(func1, others)
     --Create the composed function
     local modifiedFunc = function (args)
 
+        print("in composition")
         local newArgs = {}
         newArgs[1] = 2
         for i=1,#argFunc do
@@ -94,6 +98,10 @@ function generateRecursion(func1, func2)
     --[[if (aritFunc1 ~= 1 or aritFunc2 ~= 3)
         and aritFunc1 ~= 0 or aritFunc2 ~=2 then--]]
         print("ERROR wrong argument arity in recursion")
+        print("func1")
+        print(aritFunc1)
+        print("func2")
+        print(aritFunc2)
         return nil
     end
 
@@ -102,31 +110,41 @@ function generateRecursion(func1, func2)
     --Create the recursion function
     modifiedFunc = function (args)
 
+        print("in recursion")
         local count = args[args[1]]
-        if count == 0 then
-            local newArgs = args
+
+        if count == 0 or count == nil then
+
+            local newArgs = deepTableCopy(args)
             -- this function will be interested in the x of the (0,x) argument couple
-            table.remove(newArgs, 2)
-            return origFunc1(newArgs)
+            table.remove(newArgs, newArgs[1])
+
+            local recRes = origFunc1(newArgs)
+
+            return recRes
         else
             --the argument for the return function : origFunct2
             local newArgs2 = {}
             --the arguments for the recursion function
-            local newArgs3 = args
+            local newArgs3 = deepTableCopy(args)
             newArgs3[args[1]] = count - 1
 
             newArgs2[1] = 2
             newArgs2[2] = count - 1
             newArgs2[3] = modifiedFunc(newArgs3)
+
             --get the second part of the original arguments (so x for the (0,x) arguments)
             newArgs2[4] = args[args[1]+1]
-            return origFunc2(newArgs2)
+
+            local recRes = origFunc2(newArgs2)
+
+            return recRes
         end
 
     end
 
-    --the returned function arity is 1, I hope
-    return {modifiedFunc, 1}
+    --the returned function arity is this, I hope
+    return {modifiedFunc, (aritFunc1+aritFunc2)/2}
 end
 
 
@@ -140,11 +158,8 @@ function right_arity(func)
     local originalFunc = func[1]
 
     local modifiedFunc = function (args)
-        --[[
-        args[1] = 2
-        args[#args + 1] = 0
-        --]]
-        return originalFunc(args)
+        args2 = deepTableCopy(args)
+        return originalFunc(args2)
     end
 
     return {modifiedFunc, func[2]+1}
@@ -161,8 +176,10 @@ function left_arity(func)
     local originalFunc = func[1]
 
     local modifiedFunc = function (args)
-        args[1] = args[1] + 1
-        return originalFunc(args)
+
+        args2 = deepTableCopy(args)
+        args2[1] = args2[1] + 1
+        return originalFunc(args2)
     end
 
     return {modifiedFunc, func[2]+1}
@@ -179,6 +196,26 @@ function TableConcat(t1,t2)
         return t1
 end
 
+--[[
+--Lua passes all tables by reference...wich is really anoying when you spend hours looking for a bug
+-- which was only due to tables not beeing copied
+-- So... here is the copy function
+--]]
+function deepTableCopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepTableCopy(orig_key)] = deepTableCopy(orig_value)
+        end
+        setmetatable(copy, deepTableCopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
 --basic functions
 -- each entry contain the function reference and the function arity
 basics = {}
@@ -189,6 +226,12 @@ basics["o"] = {generateComposition, 2}
 basics["r"] = {generateRecursion, 2}
 basics["<"] = {left_arity, 1}
 basics[">"] = {right_arity, 1}
+
+symbols = {"z", "i", "s", "o", "r", "<", ">"}
+
+for i=1,#symbols do
+    predicates[symbols[i]] = basics[symbols[i]]
+end
 
 print(basics["r"][1])
 print(basics["r"][2])
