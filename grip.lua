@@ -57,7 +57,7 @@ while true do
 
                             predicates[pred] = resEval[1]
                         else
-                            print("ERROR : ")
+                            print("ERROR : unable to evaluate expression, check for semantical non-sense")
                             print(resEval)
                         end
 
@@ -87,9 +87,16 @@ while true do
                                      print(arguments[i])
                              end
 
-                             local res = predicates[pred][1](arguments)
-                             print("///////RESULT//////")
-                             print(res)
+                            sucess, resEval = pcall(predicates[pred][1],arguments)
+                            if sucess then
+                                 print("///////RESULT//////")
+                                 print(resEval)
+
+                            else
+                                print("ERROR : unable to compute : bad arguments")
+                                print(resEval)
+                            end
+
                         end
 
                     end

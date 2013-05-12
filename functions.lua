@@ -19,7 +19,7 @@ end
 function identity(args)
     local index = args[1]
     if index > #args then
-        print("Error during evaluation, wrong number of argument")
+        print("Error during identity, wrong number of argument")
         return nil
     end
     return args[index]
@@ -29,7 +29,7 @@ end
 function successor(args)
     local index = args[1]
     if index > #args then
-        print("Error during evaluation, wrong number of argument")
+        print("Error during successor, wrong number of argument")
         return nil
     end
     return args[index] + 1
@@ -94,6 +94,10 @@ function generateRecursion(func1, func2)
     --[[if (aritFunc1 ~= 1 or aritFunc2 ~= 3)
         and aritFunc1 ~= 0 or aritFunc2 ~=2 then--]]
         print("ERROR wrong argument arity in recursion")
+        print("func1")
+        print(aritFunc1)
+        print("func2")
+        print(aritFunc2)
         return nil
     end
 
@@ -102,8 +106,17 @@ function generateRecursion(func1, func2)
     --Create the recursion function
     modifiedFunc = function (args)
 
+        print("recurs args")
+
+        for i=1,#args do
+            print(args[i])
+        end
+
         local count = args[args[1]]
-        if count == 0 then
+        print("count")
+        print(count)
+        if count == 0 or count == nil then
+            count = 0
             local newArgs = args
             -- this function will be interested in the x of the (0,x) argument couple
             table.remove(newArgs, 2)
@@ -122,11 +135,13 @@ function generateRecursion(func1, func2)
             newArgs2[4] = args[args[1]+1]
             return origFunc2(newArgs2)
         end
+        --Test
+        count = args[args[1]]
 
     end
 
-    --the returned function arity is 1, I hope
-    return {modifiedFunc, 1}
+    --the returned function arity is this, I hope
+    return {modifiedFunc, (aritFunc1+aritFunc2)/2}
 end
 
 
@@ -189,6 +204,12 @@ basics["o"] = {generateComposition, 2}
 basics["r"] = {generateRecursion, 2}
 basics["<"] = {left_arity, 1}
 basics[">"] = {right_arity, 1}
+
+symbols = {"z", "i", "s", "o", "r", "<", ">"}
+
+for i=1,#symbols do
+    predicates[symbols[i]] = basics[symbols[i]]
+end
 
 print(basics["r"][1])
 print(basics["r"][2])

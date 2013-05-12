@@ -11,6 +11,11 @@ require "functions"
 -- each of the symbols or predicates saved as strings (one symbol/predicate per entry)
 function gripEval(formula)
 
+    print("evaluating : ")
+
+    for i=1,#formula do
+        print(formula[i])
+    end
     --Not sure about that part, maybe returning nil is better
     -- it all depends on how the tableConcat handle it
     if next(formula) == nil then
