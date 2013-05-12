@@ -1,7 +1,7 @@
 GRIP
 ====
 
-GNU Recursive Interpretation Processor
+GNU Recursive Interpretation Processor.<br>
 GRIP est un interpréteur de fonctions récursives primitives écrit en LUA
 
 ### Auteurs
@@ -59,6 +59,9 @@ Forkez nous !
 -------------
 
 https://github.com/Maurogik/GRIP/
+
+
+
 
 
 
