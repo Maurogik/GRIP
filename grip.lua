@@ -4,20 +4,19 @@ require "loop"
 version =" 1.0"
 
 print("GNU RIP " .. version .. [[ 
+
+                                        
+                 _|_|_|  _|_|_|    _|_|_|  _|_|_|    
+               _|        _|    _|    _|    _|    _|  
+               _|  _|_|  _|_|_|      _|    _|_|_|    
+               _|    _|  _|    _|    _|    _|        
+                 _|_|_|  _|    _|  _|_|_|  _|        
+                                       
+                                       
+
 Welcome to GNU RIP, the GNU Recursive Interpretation Processor
 By Gwenn Aubert and Bastien Maureille -- 2013
 type help for details
-
-     °,
-      `'
-        \ ___
-         /   7
-        (_/_/\
-         \    \
-          \    \
-          _\    \__
-         (   \     )
-          \___\___/ 
 
 ]])
 

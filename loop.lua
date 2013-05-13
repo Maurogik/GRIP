@@ -26,7 +26,7 @@ function main_loop(cmd)
                         sucess, resEval = pcall(gripEval,betterDef)
                         if sucess then
                             if #resEval > 1 then
-                                    print("warning : eval result should only return 1 function")
+                                    print("warning : program too long")
                             end
 
                             predicates[pred] = resEval[1]
