@@ -40,6 +40,5 @@ end
 
 while true do
     cmd = prompt()
-    print (cmd)
     main_loop(cmd)
 end

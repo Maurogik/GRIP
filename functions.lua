@@ -12,13 +12,11 @@
 predicates = {}
 
 function zero(args)
-    print("in zero")
      return 0
 end
 
 
 function identity(args)
-    print("in identity")
     local index = args[1]
     if index > #args then
         print("Error during identity, wrong number of argument")
@@ -29,7 +27,6 @@ end
 
 
 function successor(args)
-    print("in successor")
     local index = args[1]
     if index > #args then
         print("Error during successor, wrong number of argument")
@@ -43,8 +40,6 @@ end
 --Generate a composed function
 --]]
 function generateComposition(func1, others)
-    
-    print("in generateComposition//////////////")
 
     local originalFunc = func1[1]
     local arity = func1[2]
@@ -68,7 +63,6 @@ function generateComposition(func1, others)
     --Create the composed function
     local modifiedFunc = function (args)
 
-        print("in composition")
         local newArgs = {}
         newArgs[1] = 2
         for i=1,#argFunc do
@@ -87,7 +81,6 @@ end
 --]]
 function generateRecursion(func1, func2)
 
-    print("in generateRecursion//////////////")
     --we get the functions and their arity
     local origFunc1 = func1[1]
     local aritFunc1 = func1[2]
@@ -110,7 +103,6 @@ function generateRecursion(func1, func2)
     --Create the recursion function
     modifiedFunc = function (args)
 
-        print("in recursion")
         local count = args[args[1]]
 
         if count == 0 or count == nil then
@@ -153,8 +145,6 @@ end
 --]]
 function right_arity(func)
 
-    print("in right_arity//////////////")
-
     local originalFunc = func[1]
 
     local modifiedFunc = function (args)
@@ -170,8 +160,6 @@ end
 --Generate a left arity modified function
 --]]
 function left_arity(func)
-
-    print("in left_arity//////////////")
 
     local originalFunc = func[1]
 
@@ -232,6 +220,3 @@ symbols = {"z", "i", "s", "o", "r", "<", ">"}
 for i=1,#symbols do
     predicates[symbols[i]] = basics[symbols[i]]
 end
-
---print(basics["r"][1])
---print(basics["r"][2])

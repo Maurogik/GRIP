@@ -16,8 +16,6 @@ function main_loop(cmd)
             else
          if (string.find(cmd, "=") ~= nil) then
                 pred, def = splitPredFromDef(cmd)
-                print(pred)
-                print(def)
                 otherThanSymb = string.find(def,"[^zisor<>]")
                 validPredicateStr = string.find(def,"(.+)")
                 if (uec ~= nil and validPredicateStr == nil) then
@@ -59,14 +57,9 @@ function main_loop(cmd)
                             printf("%d expected\n", predicates[pred][2])
                         else
                              -- TODO pred call
-                             print("arg : ")
-                             for i=1,#arguments do
-                                     print(arguments[i])
-                             end
 
                             sucess, resEval = pcall(predicates[pred][1],arguments)
                             if sucess then
-                                 print("///////RESULT//////")
                                  print(resEval)
 
                             else

@@ -61,8 +61,7 @@ function splitPredicateCall(cmd)
       arguments[i] = args
       i = i+1
    end
-   print(predicate[1])
-   print(arguments[1])
+
    return predicate[1], arguments[1]
 end
    
@@ -74,7 +73,6 @@ function split_args(args)
    arguments[1] = 2
    i = 2
    for arg in string.gmatch(args, "(%d+)") do
-      print(arg)
       arguments[i] = arg
       i = i+1
    end
@@ -86,14 +84,6 @@ function preProcessDef(def)
 
    resDef = {}
    i = 1
-   print("preProcessDef")
-   --////////////////////////////////TO CHANGE///////////////////////////////
-   --[[for temp in string.gmatch(def, "([zisor><(%(%w+%)])") do
-   --for temp in string.gmatch(def, "([zisor<>])") do
-      resDef[i] = temp
-      print(temp)
-      i = i+1
-   end--]]
 
    local strTemp = def
    while strTemp do
@@ -119,8 +109,6 @@ function preProcessDef(def)
          end
       end
 
-
-      print(resDef[i])
       i = i + 1
    end
 
