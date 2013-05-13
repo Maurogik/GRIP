@@ -1,6 +1,13 @@
-GRIP
-====
+<pre>
+								  __________________._____________ 
+								 /  _____/\______   \   \______   \
+								/   \  ___ |       _/   ||     ___/
+								\    \_\  \|    |   \   ||    |    
+								 \______  /|____|_  /___||____|    
+								        \/        \/            
+</pre>
 
+### A propos
 GNU Recursive Interpretation Processor.<br>
 GRIP est un interpréteur de fonctions récursives primitives écrit en LUA
 
