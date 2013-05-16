@@ -1,0 +1,55 @@
+Ligne 1 : il manque une parenthèse
+
+
+3.1 	Analyse syntaxique :
+
+
+3.2 	Analyse Semantique : 
+
+Avant de commencer la mise en place de l'analyse sémantique, nous avons du faire plusieurs choix concernant la modélisation que nous souhaitions utiliser.
+
+Pour la représentation des fonctions de bases et des predicats, le choix fut aisé. L'application garde deux tables associant des chaines de caratères à des pointeurs sur fonction. Une de ces tables est connut dès le lancement du programme et recense les fonctions de bases, l'autre recense les prédicats et est remplit lors de l'écriture de prédicats par l'utilisateur.
+
+Un autre point clé de la modélisation était de choisir la représentation des arguments. La sensibilité de cet aspect vient de la necessité d'avoir un système d'argument assez souple pour supporter le changement d'arité et permettre une manipulation aisée des arguments.
+Le système choisit représente tous les arguments dans une seule table. Cette table est également dotée d'un premier argument qui est l'indice du premier argument d'interet. Cet indicice permet de faciliter les "décalages" d'arguments lors des changements d'arité.
+
+La modélisation fixée, nous avons pu commencer la conception de l'analyse sémantique.
+
+En nous basant sur nous cours de compilation du premier semestre, nous avons choisit une statégie mettant en place un arbre d'évalutation. L'analyseur part du "haut" de l'arbre (le début de l'expression à analyser) et descend de manière récursive dans les noeuds. Aprés cela, en partant du bas, la récursion fait remonter des pointeurs sur fonction jusqu'a obtenir la fonction finale, celle qui sera sauvegardée en tant que prédicat.
+Chaque noeud de l'arbre correspond à la lecture d'un ou plusieurs symbole de l'expression. Le symbole est lu, l'action correspondante est appelée et, si besoin, l'évaluation est rappelé sur la suite de l'expression.
+
+Tout au long de ce processus, si une erreur est rencontrée, le message correspondant est affiché et l'évaluation s'arrete.
+
+Suite à l'écriture de l'algorithme d'évaluation, nous avons du faire face à un problème autrement plus complexe, comment créer des fonctions à partir d'autre fonctions de manière dynamique.
+En effet, la fonction retournée par l'évalutation de cette expression "ri><s" n'est pas la même et n'a pas le même résultat que celle retournée pas cette expression "r>z<>i", bien que le symbole lu "r" soit le même. Aucun des paradoxes habituels de la programmation objet ne permet de réaliser ce type d'opération.
+Heureusement, le Lua est un langage plein de ressources et en nous plongeant dans sa documentation, nous avons trouvé la solution à ce problème.
+En effet, le Lua possède un méchanisme nommé "function closure" qui permet de faire du lambda calcul.
+Grâce à ce méchanisme, nous pouvons écrire des fonctions génératrices de fonction, ce qui correspond exactement à ce dont nous avons besoin pour la récursion, la composition et les changements d'arité.
+
+L'exemple ci-dessous permet d'expliquer mieux ce fonctionnement.
+
+function left_arity(func)
+
+    if func == nil then
+       print("ERROR : expecting function after arity change call") 
+    end
+
+    local originalFunc = func[1]
+
+    local modifiedFunc = function (args)
+
+        args2 = TableCopy(args)
+        args2[1] = args2[1] + 1
+        return originalFunc(args2)
+    end
+
+    return {modifiedFunc, func[2]+1}
+end
+
+La fonction left_arity est l'exemple de fonction génératrice le plus simple que nous ayons.
+Lorsque left_arity est apellée, la fonction originale passée en argument est sauvegardée par le systéme, elle fait partie de l'environement de la fonction que nous retournerons.
+Une fonction modifiedFunc est créee, elle est triviale, elle se contente de changer l'indice d'interêt des arguments et de rapeller la fonction originale avec ces arguments modifiés. De cette manière, chaque appel à left_arity avec un paramètre différent générera une fonction unique.
+Nous avons également utilisé ce méchanisme pour écrire des fonctions génératrices de récursion et de composition.
+
+La simplicité et l'éfficacité de cette solution est ce qui nous a particulièrement attiré. En effet, vu que l'on ne fait que manipuler des fonctions, chaque fonctions peut etre passer en argument d'une autre, et ce jusqu'a obtenir la fonction finale. Cela rend le système d'évaluation particulièrement robuste, maintenable et facile à étandre.
+
