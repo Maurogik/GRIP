@@ -31,8 +31,7 @@ function main_loop(cmd)
 
                             predicates[pred] = resEval[1]
                         else
-                            --print("ERROR : unable to evaluate expression, check for semantical non-sense")
-                            --print(resEval)
+                            print("The expression has not been evaluated")
                         end
 
                         
