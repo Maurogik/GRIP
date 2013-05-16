@@ -41,11 +41,16 @@ end
 --]]
 function generateComposition(func1, others)
 
+    if func1 == nil then
+        print("ERROR : malformed composition")
+    end
+
     local originalFunc = func1[1]
     local arity = func1[2]
 
     if arity > #others then
-        print("ERROR : not enough argument function to compose")
+        print("ERROR : not enough function to compose, expected")
+        print(arity+1)
         return nil
     end
 
@@ -81,6 +86,9 @@ end
 --]]
 function generateRecursion(func1, func2)
 
+    if func1 == nil or func2 == nil then
+        print("ERROR : malformed recursion")
+    end
     --we get the functions and their arity
     local origFunc1 = func1[1]
     local aritFunc1 = func1[2]
@@ -91,9 +99,9 @@ function generateRecursion(func1, func2)
     --[[if (aritFunc1 ~= 1 or aritFunc2 ~= 3)
         and aritFunc1 ~= 0 or aritFunc2 ~=2 then--]]
         print("ERROR wrong argument arity in recursion")
-        print("func1")
+        print("func1 arity :")
         print(aritFunc1)
-        print("func2")
+        print("func2 arity :")
         print(aritFunc2)
         return nil
     end
@@ -145,6 +153,10 @@ end
 --]]
 function right_arity(func)
 
+    if func == nil then
+       print("ERROR : expecting function after arity change call") 
+    end
+
     local originalFunc = func[1]
 
     local modifiedFunc = function (args)
@@ -160,6 +172,10 @@ end
 --Generate a left arity modified function
 --]]
 function left_arity(func)
+
+    if func == nil then
+       print("ERROR : expecting function after arity change call") 
+    end
 
     local originalFunc = func[1]
 

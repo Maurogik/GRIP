@@ -26,13 +26,13 @@ function main_loop(cmd)
                         sucess, resEval = pcall(gripEval,betterDef)
                         if sucess then
                             if #resEval > 1 then
-                                    print("warning : program too long")
+                                    print("warning : program too long (the valid part has been evaluated)")
                             end
 
                             predicates[pred] = resEval[1]
                         else
-                            print("ERROR : unable to evaluate expression, check for semantical non-sense")
-                            print(resEval)
+                            --print("ERROR : unable to evaluate expression, check for semantical non-sense")
+                            --print(resEval)
                         end
 
                         

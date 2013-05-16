@@ -58,6 +58,11 @@ function gripEval(formula)
         --evaluate the rest of the formula, we will need it
         temp = gripEval(formula)
         firstCompoFunc = temp[1]
+
+        if firstCompoFunc == nil then
+            print("ERROR expecting function after composition")
+        end
+
         arity = firstCompoFunc[2]
         table.remove(temp, 1)
         --take the first evaluated function FIRST and pass it to the composition
