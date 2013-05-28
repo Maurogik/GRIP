@@ -3,8 +3,8 @@
 								 /  _____/\______   \   \______   \
 								/   \  ___ |       _/   ||     ___/
 								\    \_\  \|    |   \   ||    |    
-								 \______  /|____|_  /___||____|    
-								        \/        \/            
+								 \______  /|____|_  /___||____| 
+								        \/        \/ 
 </pre>
 
 ### A propos
@@ -50,7 +50,7 @@ les instructions valides pour GRIP sont détaillées en tapant la commande
 dans l'interpréteur. La commande 'exit' permet de sortir du programme.
 
 
-### Known problems
+### Problèmes connus
 
 - il est possible de définir un prédicat avec plus d'un caractère '=' :
   pred=oss=oii est une instruction 'valide' (seulement ce qui se trouve aprés le 1er '=' sera pris en compte)
@@ -72,7 +72,7 @@ https://github.com/Maurogik/GRIP/
 
 <pre>
 
-  		 			                o o"o"o"o"o"ooo o
+  			 			                o o"o"o"o"o"ooo o
 		        			 	   o M Mo"oM M Mo"o"o"o"o"ooo
 			 			         oo"o"o"o"o"o"oM M Mo"oM Mo M M
 			 			       oM M M"o"oM Mo"o"o"M M M M M M"o"oo
