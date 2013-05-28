@@ -52,13 +52,11 @@ dans l'interpréteur. La commande 'exit' permet de sortir du programme.
 
 ### Known problems
 
-- possibility to define a predicate with more than 1 '=' character :
-  pred=oss=oii is a valid instruction (only oss will be evaluated though)
+- il est possible de définir un prédicat avec plus d'un caractère '=' :
+  pred=oss=oii est une instruction 'valide' (seulement ce qui se trouve aprés le 1er '=' sera pris en compte)
 
-- possibility to call a predicate with more than one parenthesis pair
-  pred()pred() is interpretated pred(")pred(")
 
-- not only ',' is a separator in predicates' arguments
+- le caractère ',' n'est pas le seul symbole accepté pour séparer les arguments ('.' ';' sont aussi acceptés) 
 
 
 
