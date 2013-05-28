@@ -53,7 +53,7 @@ dans l'interpréteur. La commande 'exit' permet de sortir du programme.
 ### Known problems
 
 - possibility to define a predicate with more than 1 '=' character :
-  pred=rio=rio is a valid instruction
+  pred=oss=oii is a valid instruction (only oss will be evaluated though)
 
 - possibility to call a predicate with more than one parenthesis pair
   pred()pred() is interpretated pred(")pred(")

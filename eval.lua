@@ -1,8 +1,4 @@
 
---TODO, if not needed clean up the redundant cases in the switch below : NEEDED
---TODO, add arity integreation : as a second value in each function table entry : DONE
---TODO, check the arity functions, I'm not sure about how they should behave : DONE
-
 require "functions"
 
 --The recursive evaluation function, return a table of the evaluated functions and their arity
@@ -92,6 +88,11 @@ function gripEval(formula)
     elseif predicates[currentExp] ~= nil then
 
         return TableConcat( {predicates[currentExp]}, gripEval(formula) )
+
+    else
+
+        print("unexpected symbol found")
+        error("unable to evaluate")
 
     end
 
